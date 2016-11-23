@@ -13,6 +13,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String KEY_DATA = "DATA";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (PreferencesManager.getInstance(MainActivity.this).getEndPoint().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "End Point is empty, please enter an end point", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 IntentIntegrator intent = new IntentIntegrator(MainActivity.this);
                 intent.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 intent.setPrompt("Place a ticket's QR Code inside the viewfinder rectangle to scan\nThis screen will automatically closed in 15 seconds");
@@ -35,10 +42,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button goBtn = (Button) findViewById(R.id.go_btn);
+        final TextView code = (TextView) findViewById(R.id.code_txt);
         goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (PreferencesManager.getInstance(MainActivity.this).getEndPoint().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "End Point is empty, please enter an end point", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                if (code.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Code cannot empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(MainActivity.this, WebviewActivity.class);
+                intent.putExtra(KEY_DATA, code.getText().toString());
                 startActivity(intent);
             }
         });
@@ -62,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, WebviewActivity.class);
-                intent.putExtra("params", result.getContents());
+                intent.putExtra(KEY_DATA, result.getContents());
                 startActivity(intent);
             }
         } else {

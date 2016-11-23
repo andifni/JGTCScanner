@@ -20,6 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:id="@+id/scan_btn" />
 
     <TextView
