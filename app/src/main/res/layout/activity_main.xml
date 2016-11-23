@@ -1,18 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.andifni.jgtcscanner.MainActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <Button
+        android:text="@string/scan_now"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:id="@+id/scan_btn" />
 
     <TextView
+        android:text="OR"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/scan_btn"
+        android:id="@+id/or_txt"/>
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_below="@id/or_txt"-->
+    <!--android:background="@color/colorAccent"-->
+    <!--android:id="@+id/border1"-->
+    <!--/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_below="@id/or_txt"
+        android:id="@+id/linear_layout"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/code_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="3"
+                android:hint="Enter code manually"/>
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Enter"
+            android:id="@+id/go_btn"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+    </LinearLayout>
+
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@color/colorAccent"-->
+    <!--android:id="@+id/border2"-->
+    <!--android:layout_below="@id/linear_layout"-->
+    <!--/>-->
+
+</RelativeLayout>
+
+    <TextView
+        android:text="@string/settings"
+        android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:id="@+id/setting_btn" />
 </RelativeLayout>
